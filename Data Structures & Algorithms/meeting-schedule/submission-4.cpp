@@ -1,0 +1,38 @@
+/**
+ * Definition of Interval:
+ * class Interval {
+ * public:
+ *     int start, end;
+ *     Interval(int start, int end) {
+ *         this->start = start;
+ *         this->end = end;
+ *     }
+ * }
+ */
+
+class Solution {
+public:
+    bool canAttendMeetings(vector<Interval>& intervals) {
+
+        if(intervals.size()<=1){
+            return true;
+        }
+        sort(intervals.begin(),intervals.end(),[](const auto& a , const auto&b){
+            return a.start<b.start;
+        });
+
+        bool flag = false;
+
+        for(int i=0;i<intervals.size()-1;i++){
+            if(intervals[i].end<=intervals[i+1].start){
+                flag = true;
+            }
+            else{
+                flag = false;
+                break;
+            }
+        }
+
+        return flag;
+    }
+};
